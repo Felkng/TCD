@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.br.edu.ifnmg.tcd;
+package com.br.edu.ifnmg.tcd.screen;
+
+import java.awt.Toolkit;
 
 /**
  *
@@ -13,10 +15,19 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin() {
+    private static TelaLogin instance;
+
+    private TelaLogin() {
         initComponents();
     }
 
+    public static TelaLogin getInstance() {
+        if (instance == null) {
+            instance = new TelaLogin();
+        }
+
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,13 +45,28 @@ public class TelaLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Login");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png")));
+        setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(60, 60, 60));
+
+        jTextField1.setBackground(new java.awt.Color(64, 64, 64));
+        jTextField1.setForeground(new java.awt.Color(64, 64, 64));
+
+        jLabel1.setBackground(new java.awt.Color(64, 64, 64));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuário:");
 
+        jLabel2.setBackground(new java.awt.Color(64, 64, 64));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha:");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setBackground(new java.awt.Color(64, 64, 64));
+        jPasswordField1.setForeground(new java.awt.Color(64, 64, 64));
 
+        jButton1.setBackground(new java.awt.Color(64, 64, 64));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Confirmar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +157,7 @@ public class TelaLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin().setVisible(true);
+                TelaLogin.getInstance().setVisible(true);
             }
         });
     }
