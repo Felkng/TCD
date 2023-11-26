@@ -23,6 +23,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private TelaLogin() {
         initComponents();
+        lblIncorrectLogin.setVisible(false);
     }
 
     public static TelaLogin getInstance() {
@@ -48,6 +49,7 @@ public class TelaLogin extends javax.swing.JFrame {
         lblPwd = new javax.swing.JLabel();
         pwdSenha = new javax.swing.JPasswordField();
         btnConfirma = new javax.swing.JButton();
+        lblIncorrectLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login");
@@ -58,6 +60,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
         txtUser.setBackground(new java.awt.Color(64, 64, 64));
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
+            }
+        });
 
         lblUsr.setBackground(new java.awt.Color(64, 64, 64));
         lblUsr.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,6 +76,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
         pwdSenha.setBackground(new java.awt.Color(64, 64, 64));
         pwdSenha.setForeground(new java.awt.Color(255, 255, 255));
+        pwdSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pwdSenhaKeyPressed(evt);
+            }
+        });
 
         btnConfirma.setBackground(new java.awt.Color(64, 64, 64));
         btnConfirma.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,6 +91,9 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        lblIncorrectLogin.setForeground(new java.awt.Color(240, 0, 0));
+        lblIncorrectLogin.setText("Usuário ou senha incorretos!");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,21 +102,25 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblUsr)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnConfirma)
-                            .addComponent(pwdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(pwdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUsr)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblIncorrectLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))))
                 .addGap(94, 94, 94))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(59, 59, 59)
+                .addComponent(lblIncorrectLogin)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsr))
@@ -168,14 +187,31 @@ public class TelaLogin extends javax.swing.JFrame {
             txtUser.requestFocus();
             txtUser.selectAll();
             pwdSenha.setText(null);
+            lblIncorrectLogin.setVisible(true);
             // Apenas como exemplo!
             // Para melhorar a usabilidade do sistema, exibir um rótulo contendo
             // a mensagem é preferível em vez de uma mensagem que requer que
             // o usuário interaja com ela
-            JOptionPane.showMessageDialog(this, "Usuário e/ou senha inválidos.\nTente novamente.");
+            //JOptionPane.showMessageDialog(this, "Usuário e/ou senha inválidos.\nTente novamente.");
         }
 
     }//GEN-LAST:event_btnConfirmaActionPerformed
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER || evt.getKeyChar() == '\n') {
+            btnConfirmaActionPerformed(null);
+        } else {
+            lblIncorrectLogin.setVisible(false);
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
+
+    private void pwdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdSenhaKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER || evt.getKeyChar() == '\n') {
+            btnConfirmaActionPerformed(null);
+        } else {
+            lblIncorrectLogin.setVisible(false);
+        }
+    }//GEN-LAST:event_pwdSenhaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -215,6 +251,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirma;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblIncorrectLogin;
     private javax.swing.JLabel lblPwd;
     private javax.swing.JLabel lblUsr;
     private javax.swing.JPasswordField pwdSenha;
