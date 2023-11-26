@@ -73,6 +73,6 @@ public class Credential extends Entity{
 
     @Override
     public String toString() {
-        return "ENCONTRADO {" + "username=" + username + ", password=" + password + ", lastAccess=" + lastAccess + ", enabled=" + enabled + '}';
+        return "ENCONTRADO {" + "username=" + username + ", password=" + password + ", lastAccess=" + lastAccess + ", enabled=" + enabled + ", id=" + getId() + '}';
     }
 }

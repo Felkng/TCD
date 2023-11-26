@@ -78,12 +78,12 @@ public class CredentialDao extends Dao<Credential> {
         try ( PreparedStatement preparedStatement
                       = DbConnection.getConnection().prepareStatement(
                 findUser())) {
-
+            
             // Assemble the SQL statement with the id
             preparedStatement.setString(1, credential.getUsername());
             preparedStatement.setString(2, credential.getPassword() + SALT);
             // Show the full sentence
-            // System.out.println(">> SQL: " + preparedStatement);
+//             System.out.println(">> SQL: " + preparedStatement);
 
             // Performs the query on the database
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -107,9 +107,8 @@ public class CredentialDao extends Dao<Credential> {
             Credential credentialInDataBase = findByCredential(credential);
             if(credentialInDataBase != null)
                 user = credentialInDataBase.getUser();
-            
         }catch (Exception ex) {
-                System.out.println("Exception in extractObject: " + ex);
+                System.out.println("Exception in authenticate: " + ex);
         }
         return user;
     }
@@ -123,6 +122,7 @@ public class CredentialDao extends Dao<Credential> {
             credential = new Credential();
             credential.setId(resultSet.getLong("id"));
             User user = new UserDao().findById(credential.getId());
+            user.setCredential(credential);
             credential.setUser(user);
             credential.setUsername(resultSet.getString("username"));
             credential.setPassword(resultSet.getString("password"));
