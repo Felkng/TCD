@@ -4,6 +4,8 @@
  */
 package com.br.edu.ifnmg.tcd.screen;
 
+import com.br.edu.ifnmg.tcd.credential.Credential;
+
 /**
  *
  * @author Felkng <&it;felkng374 at @gmail.com&gt;>
@@ -13,16 +15,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
+    
+    private static TelaPrincipal instance;
+    
     public TelaPrincipal() {
         initComponents();
     }
     
-//    public static TelaPrincipal getInstance(Credencial credencial) {
-//
-//        if (instance == null) {
-//            instance = new TelaPrincipal();
-//        }
-//
+    public static TelaPrincipal getInstance(Credential credencial) {
+
+        if (instance == null) {
+            instance = new TelaPrincipal();
+        }
+
 //        //<editor-fold defaultstate="collapsed" desc="Ativação/Desativação de menus">
 //        // Escolha entre ocultar
 //        // Perceba que a própria classe pode ter acesso direto a seus atributos
@@ -32,10 +37,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //        // ... ou desabilitar
 ////        instance.mnuCadastroUsuario.setEnabled(credencial.isAdministrador());
 //        //</editor-fold>
-////        
-//        return instance;
-//    }
-
+//        
+        return instance;
+    }
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +58,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPasswordField1.setText("jPasswordField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,6 +97,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        TelaLogin.getInstance().setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
