@@ -27,16 +27,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
             instance = new TelaPrincipal();
         }
 
-//        //<editor-fold defaultstate="collapsed" desc="Ativação/Desativação de menus">
-//        // Escolha entre ocultar
-//        // Perceba que a própria classe pode ter acesso direto a seus atributos
-//        // privados. Por isso não houve um ...getMnuCadastroUsuario()
-//        instance.mnuCadastroUsuario.setVisible(credencial.isAdministrador());
-//
-//        // ... ou desabilitar
-////        instance.mnuCadastroUsuario.setEnabled(credencial.isAdministrador());
-//        //</editor-fold>
-//        
+        //<editor-fold defaultstate="collapsed" desc="Ativação/Desativação de menus">
+        // Escolha entre ocultar
+        // Perceba que a própria classe pode ter acesso direto a seus atributos
+        // privados. Por isso não houve um ...getMnuCadastroUsuario()
+//        instance.mnuEmprestimo.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
+//        instance.mnuBook.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
+        instance.mnuAddBook.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
+        instance.mnuAddEmp.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
+
+        // ... ou desabilitar
+//        instance.mnuCadastroUsuario.setEnabled(credencial.isAdministrador());
+        //</editor-fold>
+        
         return instance;
     }
 
@@ -51,18 +54,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPasswordField1 = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuBar = new javax.swing.JMenuBar();
+        mnuUser = new javax.swing.JMenu();
+        mnuQueryUsr = new javax.swing.JMenuItem();
+        mnuUpdateUsr = new javax.swing.JMenuItem();
+        mnuBook = new javax.swing.JMenu();
+        mnuQueryBook = new javax.swing.JMenuItem();
+        mnuAddBook = new javax.swing.JMenuItem();
+        mnuEmprestimo = new javax.swing.JMenu();
+        mnuQueryEmp = new javax.swing.JMenuItem();
+        mnuAddEmp = new javax.swing.JMenuItem();
 
         jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(64, 64, 64));
+        setPreferredSize(new java.awt.Dimension(665, 400));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(64, 64, 64));
+        jPanel1.setForeground(new java.awt.Color(64, 64, 64));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,16 +87,49 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        menuBar.setBackground(new java.awt.Color(40, 40, 40));
+        menuBar.setBorder(null);
+        menuBar.setForeground(new java.awt.Color(0, 0, 0));
+        menuBar.setBorderPainted(false);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mnuUser.setBackground(new java.awt.Color(70, 70, 70));
+        mnuUser.setForeground(new java.awt.Color(0, 0, 0));
+        mnuUser.setText("Usuário");
 
-        setJMenuBar(jMenuBar1);
+        mnuQueryUsr.setText("Ver Usuário");
+        mnuUser.add(mnuQueryUsr);
+
+        mnuUpdateUsr.setText("alterar Usuário");
+        mnuUser.add(mnuUpdateUsr);
+
+        menuBar.add(mnuUser);
+
+        mnuBook.setBackground(new java.awt.Color(70, 70, 70));
+        mnuBook.setForeground(new java.awt.Color(0, 0, 0));
+        mnuBook.setText("Livro");
+
+        mnuQueryBook.setText("Ver Livos");
+        mnuBook.add(mnuQueryBook);
+
+        mnuAddBook.setText("Cadastrar Livro");
+        mnuBook.add(mnuAddBook);
+
+        menuBar.add(mnuBook);
+
+        mnuEmprestimo.setText("Empréstimo");
+
+        mnuQueryEmp.setText("Ver Empréstimo");
+        mnuEmprestimo.add(mnuQueryEmp);
+
+        mnuAddEmp.setText("Cadastrar Empréstimo");
+        mnuEmprestimo.add(mnuAddEmp);
+
+        menuBar.add(mnuEmprestimo);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,6 +143,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -138,10 +187,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem mnuAddBook;
+    private javax.swing.JMenuItem mnuAddEmp;
+    private javax.swing.JMenu mnuBook;
+    private javax.swing.JMenu mnuEmprestimo;
+    private javax.swing.JMenuItem mnuQueryBook;
+    private javax.swing.JMenuItem mnuQueryEmp;
+    private javax.swing.JMenuItem mnuQueryUsr;
+    private javax.swing.JMenuItem mnuUpdateUsr;
+    private javax.swing.JMenu mnuUser;
     // End of variables declaration//GEN-END:variables
 }
