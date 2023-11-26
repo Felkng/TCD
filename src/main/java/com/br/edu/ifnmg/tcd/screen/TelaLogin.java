@@ -4,7 +4,11 @@
  */
 package com.br.edu.ifnmg.tcd.screen;
 
+import com.br.edu.ifnmg.tcd.credential.Credential;
+import com.br.edu.ifnmg.tcd.credential.CredentialDao;
+import com.br.edu.ifnmg.tcd.user.User;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +56,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(60, 60, 60));
 
         jTextField1.setBackground(new java.awt.Color(64, 64, 64));
-        jTextField1.setForeground(new java.awt.Color(64, 64, 64));
+        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(64, 64, 64));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -63,7 +67,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setText("Senha:");
 
         jPasswordField1.setBackground(new java.awt.Color(64, 64, 64));
-        jPasswordField1.setForeground(new java.awt.Color(64, 64, 64));
+        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
 
         jButton1.setBackground(new java.awt.Color(64, 64, 64));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,7 +128,51 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        User usuario = null;
+        Credential c = null;
+        try{
+            c = new Credential();
+            c.setUsername(jTextField1.getText());
+            c.setPassword(new String(jPasswordField1.getPassword()));
+            usuario = new CredentialDao().authenticate(c);
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+//        System.out.println(usuario);
+
+        if (usuario != null) {
+
+            // Usuário autenticado
+            System.out.println("Usuário e senha corretos");
+
+            //  Oculta esta janela
+            this.setVisible(false);
+
+            // Prepara campos para nova entrada
+            jPasswordField1.setText(null);
+            jTextField1.requestFocus();
+            jTextField1.selectAll();
+
+            // Adoção do Singleton impede acesso direto ao construtor
+//            new TelaPrincipal().setVisible(true);
+            // TelaPrincipal requer a Credencial para habilitar/desabilitar menus
+//            TelaPrincipal.getInstance().setVisible(true);
+            TelaPrincipal.getInstance(usuario.getCredential()).setVisible(true);
+
+        } else {
+
+            // Usuário NÃO-autenticado
+            System.out.println("Usuáiro e senha INCORRETOS");
+            jTextField1.requestFocus();
+            jTextField1.selectAll();
+            jPasswordField1.setText(null);
+            // Apenas como exemplo!
+            // Para melhorar a usabilidade do sistema, exibir um rótulo contendo
+            // a mensagem é preferível em vez de uma mensagem que requer que
+            // o usuário interaja com ela
+            JOptionPane.showMessageDialog(this, "Usuário e/ou senha inválidos.\nTente novamente.");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
