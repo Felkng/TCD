@@ -12,8 +12,7 @@ public class DbConnection {
     private static Connection connection;
 
     /**
-     * URL database connection
-     * (protocol/sgbd/ip/port/database/parameters)
+     * URL database connection (protocol/sgbd/ip/port/database/parameters)
      */
     public static final String URL;
 

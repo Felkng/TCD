@@ -10,7 +10,8 @@ import com.br.edu.ifnmg.tcd.credential.CredentialDao;
 import com.br.edu.ifnmg.tcd.repository.Dao;
 import com.br.edu.ifnmg.tcd.user.UserDao;
 
-public class ReaderDao extends Dao<Reader>{
+public class ReaderDao extends Dao<Reader> {
+
     public static final String TABLE = "reader";
 
     @Override
@@ -26,22 +27,22 @@ public class ReaderDao extends Dao<Reader>{
     @Override
     public Long saveOrUpdate(Reader e) {
         Long idReader = new UserDao().saveOrUpdate(e);
-        if ( e.getId() == null || e.getId() == 0) {
+        if (e.getId() == null || e.getId() == 0) {
             e.setId(-idReader);
         } else {
             e.setId(idReader);
         }
-        
+
         super.saveOrUpdate(e);
         new CredentialDao().saveOrUpdate(e.getCredential());
-        
+
         return idReader;
     }
 
     @Override
-    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Reader e){
+    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Reader e) {
         try {
-            if(e.getId() != null && e.getId() < 0) {
+            if (e.getId() != null && e.getId() < 0) {
                 pstmt.setString(1, e.getName());
                 pstmt.setString(2, e.getEmail());
                 pstmt.setObject(3, e.getBirthDate(), Types.DATE);
@@ -52,7 +53,7 @@ public class ReaderDao extends Dao<Reader>{
                 pstmt.setObject(3, e.getBirthDate(), Types.DATE);
                 pstmt.setLong(4, e.getId());
             }
-        } catch ( SQLException ex ) {
+        } catch (SQLException ex) {
             System.out.println("Exception in composeSave or Update: " + ex);
         }
     }
@@ -79,7 +80,7 @@ public class ReaderDao extends Dao<Reader>{
 
         try {
             queryReader = new Reader();
-            
+
             queryReader.setId(rs.getLong("id"));
             Credential credential = new CredentialDao().findById(queryReader.getId());
             queryReader.setName(credential.getUser().getName());
@@ -93,5 +94,5 @@ public class ReaderDao extends Dao<Reader>{
 
         return queryReader;
     }
-    
+
 }

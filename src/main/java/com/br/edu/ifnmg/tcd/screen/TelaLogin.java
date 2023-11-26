@@ -32,6 +32,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         return instance;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,12 +131,12 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         User usuario = null;
         Credential c = null;
-        try{
+        try {
             c = new Credential();
             c.setUsername(jTextField1.getText());
             c.setPassword(new String(jPasswordField1.getPassword()));
             usuario = new CredentialDao().authenticate(c);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
 //        System.out.println(usuario);
@@ -172,7 +173,7 @@ public class TelaLogin extends javax.swing.JFrame {
             // o usuário interaja com ela
             JOptionPane.showMessageDialog(this, "Usuário e/ou senha inválidos.\nTente novamente.");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

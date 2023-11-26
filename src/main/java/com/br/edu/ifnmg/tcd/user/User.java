@@ -7,16 +7,17 @@ import com.br.edu.ifnmg.tcd.role.Role;
 import java.time.LocalDate;
 
 public class User extends Entity {
+
     private String name;
     private String email;
     private LocalDate birthDate;
     private Role role;
     private Credential credential;
-    
 
-    public User(){}
+    public User() {
+    }
 
-    public User(String name, String email, LocalDate birthDate, Role role, Credential credential) throws Exception{
+    public User(String name, String email, LocalDate birthDate, Role role, Credential credential) throws Exception {
         setName(name);
         setEmail(email);
         setBirthDate(birthDate);
@@ -28,39 +29,41 @@ public class User extends Entity {
         return name;
     }
 
-    public void setName(String name) throws Exception{
-        if(name.length() > 150)
+    public void setName(String name) throws Exception {
+        if (name.length() > 150) {
             throw new Exception("Name has more than 150 caracteres!");
-        else if(name.equals(""))
+        } else if (name.equals("")) {
             throw new Exception("Name is null!");
-        else
+        } else {
             this.name = name;
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) throws Exception{
-        if(email.length() > 255)
+    public void setEmail(String email) throws Exception {
+        if (email.length() > 255) {
             throw new Exception("Email has more than 255 caracters!");
-        else if(email.equals(""))
+        } else if (email.equals("")) {
             throw new Exception("Email is null!");
-        else
+        } else {
             this.email = email;
+        }
     }
 
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) throws Exception{
-        if(birthDate == null)
+    public void setBirthDate(LocalDate birthDate) throws Exception {
+        if (birthDate == null) {
             throw new Exception("Wrong birthDate!");
-        else
+        } else {
             this.birthDate = birthDate;
+        }
     }
-
 
     public void setRole(Role role) {
         this.role = role;
@@ -80,8 +83,8 @@ public class User extends Entity {
 
     @Override
     public String toString() {
-        return "Nome: \"" + this.name + "\", Email: \"" + this.email + "\", Data de nascimento: \"" + this.birthDate.toString() +  "\", Papel: \"" + this.role.getName() 
-        + "\", Credencial: \"" + this.credential.getUsername() + "\"";
+        return "Nome: \"" + this.name + "\", Email: \"" + this.email + "\", Data de nascimento: \"" + this.birthDate.toString() + "\", Papel: \"" + this.role.getName()
+                + "\", Credencial: \"" + this.credential.getUsername() + "\"";
     }
-    
+
 }
