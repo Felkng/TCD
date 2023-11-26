@@ -21,7 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-    public static TelaPrincipal getInstance(Credential credencial) {
+    public static TelaPrincipal getInstance(Credential credential) {
 
         if (instance == null) {
             instance = new TelaPrincipal();
@@ -33,13 +33,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // privados. Por isso não houve um ...getMnuCadastroUsuario()
 //        instance.mnuEmprestimo.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
 //        instance.mnuBook.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
-        instance.mnuAddBook.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
-        instance.mnuAddEmp.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
+        instance.mnuAddBook.setVisible(credential.getUser().getRole().getName().equals("bibliotecario"));
+        instance.mnuAddEmp.setVisible(credential.getUser().getRole().getName().equals("bibliotecario"));
+        instance.setTitle("Tela Principal - " + credential.getUser().getName());
 
         // ... ou desabilitar
 //        instance.mnuCadastroUsuario.setEnabled(credencial.isAdministrador());
         //</editor-fold>
-        
         return instance;
     }
 
