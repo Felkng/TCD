@@ -29,7 +29,7 @@ public abstract class Dao<E> implements IDao<E> {
                 composeSaveOrUpdateStatement(preparedStatement, e);
 
                 // Show the full sentence
-                // System.out.println(">> SQL: " + preparedStatement);
+//                 System.out.println(">> SQL: " + preparedStatement);
                 // Performs insertion into the database
                 preparedStatement.executeUpdate();
 

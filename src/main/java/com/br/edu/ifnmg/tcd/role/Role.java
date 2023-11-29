@@ -18,7 +18,7 @@ public class Role extends Entity {
             throw new Exception("Role undefined!");
         }
 
-        this.name = name.toLowerCase();
+        this.name = name.toUpperCase();
     }
 
     public Role(String name) throws Exception {
