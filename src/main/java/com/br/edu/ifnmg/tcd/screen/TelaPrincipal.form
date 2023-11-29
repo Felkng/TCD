@@ -39,8 +39,21 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuUpdateUsr">
               <Properties>
-                <Property name="text" type="java.lang.String" value="alterar Usu&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Alterar Usu&#xe1;rio"/>
               </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuNewUser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Novo Usu&#xe1;rio"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmnuOut">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sair"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmnuOutActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -31,10 +31,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Escolha entre ocultar
         // Perceba que a própria classe pode ter acesso direto a seus atributos
         // privados. Por isso não houve um ...getMnuCadastroUsuario()
-//        instance.mnuEmprestimo.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
-//        instance.mnuBook.setVisible(credencial.getUser().getRole().getName().equals("bibliotecario"));
-        instance.mnuAddBook.setVisible(credential.getUser().getRole().getName().equals("bibliotecario"));
-        instance.mnuAddEmp.setVisible(credential.getUser().getRole().getName().equals("bibliotecario"));
+        instance.mnuNewUser.setVisible(credential.getUser().getRole().getName().equals("ADMINISTRADOR"));
+        instance.mnuAddBook.setVisible(!credential.getUser().getRole().getName().equals("LEITOR"));
+        instance.mnuAddEmp.setVisible(!credential.getUser().getRole().getName().equals("LEITOR"));
         instance.setTitle("Tela Principal - " + credential.getUser().getName());
 
         // ... ou desabilitar
@@ -58,6 +57,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mnuUser = new javax.swing.JMenu();
         mnuQueryUsr = new javax.swing.JMenuItem();
         mnuUpdateUsr = new javax.swing.JMenuItem();
+        mnuNewUser = new javax.swing.JMenuItem();
+        jmnuOut = new javax.swing.JMenuItem();
         mnuBook = new javax.swing.JMenu();
         mnuQueryBook = new javax.swing.JMenuItem();
         mnuAddBook = new javax.swing.JMenuItem();
@@ -102,8 +103,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mnuQueryUsr.setText("Ver Usuário");
         mnuUser.add(mnuQueryUsr);
 
-        mnuUpdateUsr.setText("alterar Usuário");
+        mnuUpdateUsr.setText("Alterar Usuário");
         mnuUser.add(mnuUpdateUsr);
+
+        mnuNewUser.setText("Cadastrar Novo Usuário");
+        mnuUser.add(mnuNewUser);
+
+        jmnuOut.setText("Sair");
+        jmnuOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmnuOutActionPerformed(evt);
+            }
+        });
+        mnuUser.add(jmnuOut);
 
         menuBar.add(mnuUser);
 
@@ -151,6 +163,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaLogin.getInstance().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
+    private void jmnuOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmnuOutActionPerformed
+        this.setVisible(false);
+        TelaLogin.getInstance().setVisible(true);
+    }//GEN-LAST:event_jmnuOutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,11 +206,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JMenuItem jmnuOut;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem mnuAddBook;
     private javax.swing.JMenuItem mnuAddEmp;
     private javax.swing.JMenu mnuBook;
     private javax.swing.JMenu mnuEmprestimo;
+    private javax.swing.JMenuItem mnuNewUser;
     private javax.swing.JMenuItem mnuQueryBook;
     private javax.swing.JMenuItem mnuQueryEmp;
     private javax.swing.JMenuItem mnuQueryUsr;
