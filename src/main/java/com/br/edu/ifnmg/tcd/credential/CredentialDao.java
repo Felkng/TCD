@@ -1,4 +1,5 @@
 package com.br.edu.ifnmg.tcd.credential;
+
 import com.br.edu.ifnmg.tcd.repository.Dao;
 import com.br.edu.ifnmg.tcd.repository.DbConnection;
 import com.br.edu.ifnmg.tcd.user.User;
@@ -11,6 +12,7 @@ import java.sql.Types;
 import java.time.LocalDate;
 
 public class CredentialDao extends Dao<Credential> {
+
     public static final String TABLE = "credential";
     private static final String SALT = "!asdf";
 
@@ -21,23 +23,23 @@ public class CredentialDao extends Dao<Credential> {
 
     @Override
     public String getUpdateStatement() {
-        return "update "+ TABLE + " set username = ?, password = ?, last_access = ?, enabled = ? where id = ?";
+        return "update " + TABLE + " set username = ?, password = ?, last_access = ?, enabled = ? where id = ?";
     }
 
     @Override
     public Long saveOrUpdate(Credential e) {
-        
+
         e.setId(e.getUser().getId());
-        
+
         Long idCredential = super.saveOrUpdate(e);
 
         return idCredential;
     }
 
     @Override
-    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Credential e){
+    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Credential e) {
         try {
-            if(e.getId() != null && e.getId() < 0) {
+            if (e.getId() != null && e.getId() < 0) {
                 pstmt.setString(1, e.getUsername());
                 pstmt.setString(2, e.getPassword() + SALT);
                 pstmt.setObject(3, e.getLastAccess(), Types.DATE);
@@ -50,7 +52,7 @@ public class CredentialDao extends Dao<Credential> {
                 pstmt.setBoolean(4, e.getEnabled());
                 pstmt.setLong(5, e.getUser().getId());
             }
-        } catch ( SQLException ex ) {
+        } catch (SQLException ex) {
             System.out.println("Exception in composeSave or Update: " + ex);
         }
     }
@@ -70,20 +72,20 @@ public class CredentialDao extends Dao<Credential> {
         return "Delete from " + TABLE + " where id = ?";
     }
 
-    private String findUser(){
+    private String findUser() {
         return "select id, username, password, last_access, enabled from " + TABLE + " where username = ? and password = md5(?)";
     }
 
     private Credential findByCredential(Credential credential) {
-        try ( PreparedStatement preparedStatement
-                      = DbConnection.getConnection().prepareStatement(
-                findUser())) {
+        try (PreparedStatement preparedStatement
+                = DbConnection.getConnection().prepareStatement(
+                        findUser())) {
 
             // Assemble the SQL statement with the id
             preparedStatement.setString(1, credential.getUsername());
             preparedStatement.setString(2, credential.getPassword() + SALT);
             // Show the full sentence
-            // System.out.println(">> SQL: " + preparedStatement);
+//             System.out.println(">> SQL: " + preparedStatement);
 
             // Performs the query on the database
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -100,16 +102,15 @@ public class CredentialDao extends Dao<Credential> {
         return null;
     }
 
-
-    public User authenticate(Credential credential){
+    public User authenticate(Credential credential) {
         User user = null;
-        try{
+        try {
             Credential credentialInDataBase = findByCredential(credential);
-            if(credentialInDataBase != null)
+            if (credentialInDataBase != null) {
                 user = credentialInDataBase.getUser();
-            
-        }catch (Exception ex) {
-                System.out.println("Exception in extractObject: " + ex);
+            }
+        } catch (Exception ex) {
+            System.out.println("Exception in authenticate: " + ex);
         }
         return user;
     }
@@ -123,12 +124,13 @@ public class CredentialDao extends Dao<Credential> {
             credential = new Credential();
             credential.setId(resultSet.getLong("id"));
             User user = new UserDao().findById(credential.getId());
+            user.setCredential(credential);
             credential.setUser(user);
             credential.setUsername(resultSet.getString("username"));
             credential.setPassword(resultSet.getString("password"));
-            credential.setLastAccess( resultSet.getObject("last_access", LocalDate.class));
+            credential.setLastAccess(resultSet.getObject("last_access", LocalDate.class));
             credential.setEnabled(resultSet.getBoolean("enabled"));
-         } catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Exception in extractObject: " + ex);
         }
 
@@ -136,4 +138,3 @@ public class CredentialDao extends Dao<Credential> {
     }
 
 }
-

@@ -2,7 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.br.edu.ifnmg.tcd;
+package com.br.edu.ifnmg.tcd.screen;
+
+import com.br.edu.ifnmg.tcd.credential.Credential;
+import com.br.edu.ifnmg.tcd.credential.CredentialDao;
+import com.br.edu.ifnmg.tcd.user.User;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +19,19 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin() {
+    private static TelaLogin instance;
+
+    private TelaLogin() {
         initComponents();
+        lblIncorrectLogin.setVisible(false);
+    }
+
+    public static TelaLogin getInstance() {
+        if (instance == null) {
+            instance = new TelaLogin();
+        }
+
+        return instance;
     }
 
     /**
@@ -27,26 +44,55 @@ public class TelaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        txtUser = new javax.swing.JTextField();
+        lblUsr = new javax.swing.JLabel();
+        lblPwd = new javax.swing.JLabel();
+        pwdSenha = new javax.swing.JPasswordField();
+        btnConfirma = new javax.swing.JButton();
+        lblIncorrectLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Login");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png")));
+        setResizable(false);
 
-        jLabel1.setText("Usuário:");
+        jPanel1.setBackground(new java.awt.Color(60, 60, 60));
 
-        jLabel2.setText("Senha:");
-
-        jPasswordField1.setText("jPasswordField1");
-
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        txtUser.setBackground(new java.awt.Color(64, 64, 64));
+        txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
             }
         });
+
+        lblUsr.setBackground(new java.awt.Color(64, 64, 64));
+        lblUsr.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsr.setText("Usuário:");
+
+        lblPwd.setBackground(new java.awt.Color(64, 64, 64));
+        lblPwd.setForeground(new java.awt.Color(255, 255, 255));
+        lblPwd.setText("Senha:");
+
+        pwdSenha.setBackground(new java.awt.Color(64, 64, 64));
+        pwdSenha.setForeground(new java.awt.Color(255, 255, 255));
+        pwdSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pwdSenhaKeyPressed(evt);
+            }
+        });
+
+        btnConfirma.setBackground(new java.awt.Color(64, 64, 64));
+        btnConfirma.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirma.setText("Confirmar");
+        btnConfirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmaActionPerformed(evt);
+            }
+        });
+
+        lblIncorrectLogin.setForeground(new java.awt.Color(240, 0, 0));
+        lblIncorrectLogin.setText("Usuário ou senha incorretos!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -56,31 +102,35 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(lblPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnConfirma)
+                            .addComponent(pwdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUsr)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblIncorrectLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))))
                 .addGap(94, 94, 94))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(66, 66, 66)
+                .addComponent(lblIncorrectLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsr))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(93, Short.MAX_VALUE))
+                    .addComponent(lblPwd)
+                    .addComponent(pwdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(btnConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,11 +145,73 @@ public class TelaLogin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmaActionPerformed
+        User usuario = null;
+        Credential c = null;
+        try {
+            c = new Credential();
+            c.setUsername(txtUser.getText());
+            c.setPassword(new String(pwdSenha.getPassword()));
+            usuario = new CredentialDao().authenticate(c);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+//        System.out.println(usuario);
+
+        if (usuario != null) {
+
+            // Usuário autenticado
+            System.out.println("Usuário e senha corretos");
+
+            //  Oculta esta janela
+            this.setVisible(false);
+
+            // Prepara campos para nova entrada
+            pwdSenha.setText(null);
+            txtUser.requestFocus();
+            txtUser.selectAll();
+
+            // Adoção do Singleton impede acesso direto ao construtor
+//            new TelaPrincipal().setVisible(true);
+            // TelaPrincipal requer a Credencial para habilitar/desabilitar menus
+//            TelaPrincipal.getInstance().setVisible(true);
+            TelaPrincipal.getInstance(usuario.getCredential()).setVisible(true);
+
+        } else {
+
+            // Usuário NÃO-autenticado
+            System.out.println("Usuáiro e senha INCORRETOS");
+            txtUser.requestFocus();
+            txtUser.selectAll();
+            pwdSenha.setText(null);
+            lblIncorrectLogin.setVisible(true);
+            // Apenas como exemplo!
+            // Para melhorar a usabilidade do sistema, exibir um rótulo contendo
+            // a mensagem é preferível em vez de uma mensagem que requer que
+            // o usuário interaja com ela
+            //JOptionPane.showMessageDialog(this, "Usuário e/ou senha inválidos.\nTente novamente.");
+        }
+
+    }//GEN-LAST:event_btnConfirmaActionPerformed
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER || evt.getKeyChar() == '\n') {
+            btnConfirmaActionPerformed(null);
+        } else {
+            lblIncorrectLogin.setVisible(false);
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
+
+    private void pwdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdSenhaKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER || evt.getKeyChar() == '\n') {
+            btnConfirmaActionPerformed(null);
+        } else {
+            lblIncorrectLogin.setVisible(false);
+        }
+    }//GEN-LAST:event_pwdSenhaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -131,17 +243,18 @@ public class TelaLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin().setVisible(true);
+                TelaLogin.getInstance().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnConfirma;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblIncorrectLogin;
+    private javax.swing.JLabel lblPwd;
+    private javax.swing.JLabel lblUsr;
+    private javax.swing.JPasswordField pwdSenha;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

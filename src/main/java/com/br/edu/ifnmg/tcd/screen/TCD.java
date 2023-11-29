@@ -1,8 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
-package com.br.edu.ifnmg.tcd;
+package com.br.edu.ifnmg.tcd.screen;
 
 /**
  *
@@ -11,6 +10,10 @@ package com.br.edu.ifnmg.tcd;
 public class TCD {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        TestesTCD.criarAdmin();
+        TestesTCD.criarLibrarian();
+        TestesTCD.criarReader();
+        
+        TelaLogin.main(args);
     }
 }

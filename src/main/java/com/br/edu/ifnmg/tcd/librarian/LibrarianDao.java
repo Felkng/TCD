@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class LibrarianDao extends Dao<Librarian> {
+
     public static final String TABLE = "librarian";
 
     @Override
@@ -26,22 +27,22 @@ public class LibrarianDao extends Dao<Librarian> {
     @Override
     public Long saveOrUpdate(Librarian e) {
         Long idLibrarian = new UserDao().saveOrUpdate(e);
-        if ( e.getId() == null || e.getId() == 0) {
+        if (e.getId() == null || e.getId() == 0) {
             e.setId(-idLibrarian);
         } else {
             e.setId(idLibrarian);
         }
-        
+
         super.saveOrUpdate(e);
         new CredentialDao().saveOrUpdate(e.getCredential());
-        
+
         return idLibrarian;
     }
 
     @Override
-    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Librarian e){
+    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Librarian e) {
         try {
-            if(e.getId() != null && e.getId() < 0) {
+            if (e.getId() != null && e.getId() < 0) {
                 pstmt.setString(1, e.getName());
                 pstmt.setString(2, e.getEmail());
                 pstmt.setObject(3, e.getBirthDate(), Types.DATE);
@@ -52,7 +53,7 @@ public class LibrarianDao extends Dao<Librarian> {
                 pstmt.setObject(3, e.getBirthDate(), Types.DATE);
                 pstmt.setLong(4, e.getId());
             }
-        } catch ( SQLException ex ) {
+        } catch (SQLException ex) {
             System.out.println("Exception in composeSave or Update: " + ex);
         }
     }
@@ -72,7 +73,6 @@ public class LibrarianDao extends Dao<Librarian> {
         return "delete from " + TABLE + " where id = ?";
     }
 
-
     @Override
     public Librarian extractObject(ResultSet rs) {
 
@@ -81,7 +81,7 @@ public class LibrarianDao extends Dao<Librarian> {
         try {
 
             queryLibrarian = new Librarian();
-            
+
             queryLibrarian.setId(rs.getLong("id"));
             Credential credential = new CredentialDao().findById(queryLibrarian.getId());
             queryLibrarian.setName(credential.getUser().getName());

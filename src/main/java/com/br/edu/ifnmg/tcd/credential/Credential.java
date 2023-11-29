@@ -1,10 +1,12 @@
 package com.br.edu.ifnmg.tcd.credential;
+
 import com.br.edu.ifnmg.tcd.entity.Entity;
 import com.br.edu.ifnmg.tcd.user.User;
 
 import java.time.LocalDate;
 
-public class Credential extends Entity{
+public class Credential extends Entity {
+
     private String username;
     private String password;
     private LocalDate lastAccess;
@@ -15,7 +17,7 @@ public class Credential extends Entity{
         setEnabled(null);
     }
 
-    public Credential(Long id, String username, String password, LocalDate lastAccess, Boolean enabled, User user) throws Exception{
+    public Credential(Long id, String username, String password, LocalDate lastAccess, Boolean enabled, User user) throws Exception {
         setId(id);
         setUsername(username);
         setPassword(password);
@@ -24,22 +26,25 @@ public class Credential extends Entity{
         setUser(user);
     }
 
-
     public String getUsername() {
         return username;
     }
-    
-    public void setUsername(String username) throws Exception{
-        if(username.length() > 15) throw new Exception("Tamanho invalido!"); 
-        if(username.equals("")) throw new Exception("Role undefined!");
+
+    public void setUsername(String username) throws Exception {
+        if (username.length() > 15) {
+            throw new Exception("Tamanho invalido!");
+        }
+        if (username.equals("")) {
+            throw new Exception("Role undefined!");
+        }
         this.username = username;
     }
-    
+
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) throws Exception{
+    public void setPassword(String password) throws Exception {
         this.password = password;
     }
 
@@ -47,7 +52,7 @@ public class Credential extends Entity{
         return lastAccess;
     }
 
-    public void setLastAccess(LocalDate lastAccess) { 
+    public void setLastAccess(LocalDate lastAccess) {
         this.lastAccess = lastAccess;
     }
 
@@ -56,7 +61,7 @@ public class Credential extends Entity{
     }
 
     public void setEnabled(Boolean enabled) {
-        if(enabled == null) {
+        if (enabled == null) {
             this.enabled = true;
             return;
         }
@@ -73,6 +78,6 @@ public class Credential extends Entity{
 
     @Override
     public String toString() {
-        return "ENCONTRADO {" + "username=" + username + ", password=" + password + ", lastAccess=" + lastAccess + ", enabled=" + enabled + '}';
+        return "ENCONTRADO {" + "username=" + username + ", password=" + password + ", lastAccess=" + lastAccess + ", enabled=" + enabled + ", id=" + getId() + '}';
     }
 }

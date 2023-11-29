@@ -39,18 +39,23 @@ public class UserDao extends Dao<User> {
 
     @Override
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, User user) {
-        try{
-            if(user.getName() != null)
-                pstmt.setObject(1,user.getName(), Types.VARCHAR);
-            if(user.getEmail() != null)
-                pstmt.setObject(2,user.getEmail(), Types.VARCHAR);
-            if(user.getBirthDate() != null)
+        try {
+            if (user.getName() != null) {
+                pstmt.setObject(1, user.getName(), Types.VARCHAR);
+            }
+            if (user.getEmail() != null) {
+                pstmt.setObject(2, user.getEmail(), Types.VARCHAR);
+            }
+            if (user.getBirthDate() != null) {
                 pstmt.setObject(3, user.getBirthDate(), Types.DATE);
-            if(user.getRole().getId() != null)
+            }
+            if (user.getRole().getId() != null) {
                 pstmt.setObject(4, user.getRole().getId(), Types.BIGINT);
-            if(user.getId() != null)
-                pstmt.setObject(5,user.getId(), Types.BIGINT);
-        }catch(Exception ex){
+            }
+            if (user.getId() != null) {
+                pstmt.setObject(5, user.getId(), Types.BIGINT);
+            }
+        } catch (Exception ex) {
             System.out.println("Exception in ComposeSave or Update " + ex);
         }
     }
@@ -58,7 +63,7 @@ public class UserDao extends Dao<User> {
     @Override
     public User extractObject(ResultSet rs) {
         User user = null;
-        try{
+        try {
             user = new User();
             user.setName(rs.getString("name"));
             user.setId(rs.getLong("id"));
@@ -66,7 +71,7 @@ public class UserDao extends Dao<User> {
             user.setRole(role);
             user.setEmail(rs.getString("email"));
             user.setBirthDate(rs.getDate("birthdate").toLocalDate());
-        }catch( Exception ex ){
+        } catch (Exception ex) {
             System.out.println("Exception in extractObject: " + ex);
         }
         return user;

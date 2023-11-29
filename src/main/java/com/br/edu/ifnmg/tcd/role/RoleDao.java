@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class RoleDao extends Dao<Role> {
+
     public static final String TABLE = "role";
 
     @Override
@@ -38,7 +39,7 @@ public class RoleDao extends Dao<Role> {
         return "delete from " + TABLE + " where id = ?";
     }
 
-    private String getFindByRoleStatement(){
+    private String getFindByRoleStatement() {
         return "select name, id from " + TABLE + " where name like ?";
     }
 
@@ -57,16 +58,15 @@ public class RoleDao extends Dao<Role> {
 
     public Role findByRole(String role) {
         role = "%" + role + "%";
-        try ( PreparedStatement preparedStatement
-                      = DbConnection.getConnection().prepareStatement(
-                getFindByRoleStatement())) {
+        try (PreparedStatement preparedStatement
+                = DbConnection.getConnection().prepareStatement(
+                        getFindByRoleStatement())) {
 
             // Assemble the SQL statement with the id
             preparedStatement.setString(1, role);
 
             // Show the full sentence
             // System.out.println(">> SQL: " + preparedStatement);
-
             // Performs the query on the database
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -86,8 +86,9 @@ public class RoleDao extends Dao<Role> {
     public Long saveOrUpdate(Role role) {
         Long id = 0L;
         Role roleToCompare = new RoleDao().findByRole(role.getName());
-        if(roleToCompare != null)
+        if (roleToCompare != null) {
             return roleToCompare.getId();
+        }
 
         if (role.getId() == null
                 || role.getId() == 0) {
@@ -103,7 +104,6 @@ public class RoleDao extends Dao<Role> {
 
                 // Show the full sentence
                 // System.out.println(">> SQL: " + preparedStatement);
-
                 // Performs insertion into the database
                 preparedStatement.executeUpdate();
 
@@ -131,7 +131,6 @@ public class RoleDao extends Dao<Role> {
 
                 // Show the full sentence
                 // System.out.println(">> SQL: " + preparedStatement);
-
                 // Performs the update on the database
                 preparedStatement.executeUpdate();
 
