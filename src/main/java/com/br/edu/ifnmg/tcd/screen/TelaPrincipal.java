@@ -5,6 +5,33 @@
 package com.br.edu.ifnmg.tcd.screen;
 
 import com.br.edu.ifnmg.tcd.credential.Credential;
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCobalt2IJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatDraculaIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkHardIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatHiberbeeDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatMonocaiIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatSpacegrayIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatXcodeDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import javax.swing.UIManager;
 
 /**
  *
@@ -77,9 +104,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(64, 64, 64));
-        jPanel1.setForeground(new java.awt.Color(64, 64, 64));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -91,13 +115,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGap(0, 309, Short.MAX_VALUE)
         );
 
-        menuBar.setBackground(new java.awt.Color(40, 40, 40));
         menuBar.setBorder(null);
-        menuBar.setForeground(new java.awt.Color(0, 0, 0));
         menuBar.setBorderPainted(false);
 
-        mnuUser.setBackground(new java.awt.Color(70, 70, 70));
-        mnuUser.setForeground(new java.awt.Color(0, 0, 0));
         mnuUser.setText("Usuário");
 
         mnuQueryUsr.setText("Ver Usuário");
@@ -119,8 +139,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(mnuUser);
 
-        mnuBook.setBackground(new java.awt.Color(70, 70, 70));
-        mnuBook.setForeground(new java.awt.Color(0, 0, 0));
         mnuBook.setText("Livro");
 
         mnuQueryBook.setText("Ver Livos");
@@ -177,30 +195,47 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            if (LocalDateTime.now().getHour() > 18 && LocalDateTime.now().getHour() < 6) {
+                FlatDarkPurpleIJTheme.setup(); //2
+            } else {
+                FlatMonokaiProIJTheme.setup(); //1
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }//            FlatMonokaiProIJTheme.setup(); //1
+        //            FlatDarkPurpleIJTheme.setup(); //2
+        //            FlatOneDarkIJTheme.setup(); //3
+        //            FlatAtomOneDarkIJTheme.setup(); //4
+        //            FlatArcDarkOrangeIJTheme.setup(); //5
+        catch (Exception e) {
+            e.printStackTrace();
         }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new TelaPrincipal().setVisible(true);
             }
-        });
+        }
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

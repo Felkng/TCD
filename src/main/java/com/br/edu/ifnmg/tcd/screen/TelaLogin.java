@@ -7,8 +7,13 @@ package com.br.edu.ifnmg.tcd.screen;
 import com.br.edu.ifnmg.tcd.credential.Credential;
 import com.br.edu.ifnmg.tcd.credential.CredentialDao;
 import com.br.edu.ifnmg.tcd.user.User;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
 import java.awt.Toolkit;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -56,34 +61,23 @@ public class TelaLogin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png")));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(60, 60, 60));
-
-        txtUser.setBackground(new java.awt.Color(64, 64, 64));
-        txtUser.setForeground(new java.awt.Color(255, 255, 255));
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUserKeyPressed(evt);
             }
         });
 
-        lblUsr.setBackground(new java.awt.Color(64, 64, 64));
-        lblUsr.setForeground(new java.awt.Color(255, 255, 255));
         lblUsr.setText("Usuário:");
 
         lblPwd.setBackground(new java.awt.Color(64, 64, 64));
-        lblPwd.setForeground(new java.awt.Color(255, 255, 255));
         lblPwd.setText("Senha:");
 
-        pwdSenha.setBackground(new java.awt.Color(64, 64, 64));
-        pwdSenha.setForeground(new java.awt.Color(255, 255, 255));
         pwdSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 pwdSenhaKeyPressed(evt);
             }
         });
 
-        btnConfirma.setBackground(new java.awt.Color(64, 64, 64));
-        btnConfirma.setForeground(new java.awt.Color(255, 255, 255));
         btnConfirma.setText("Confirmar");
         btnConfirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,22 +216,31 @@ public class TelaLogin extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        try{
+            if (LocalDateTime.now().getHour() > 18 && LocalDateTime.now().getHour() < 6) {
+                FlatDarkPurpleIJTheme.setup(); //2
+            } else {
+                FlatMonokaiProIJTheme.setup(); //1
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }catch (Exception e){
+            e.printStackTrace();
         }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
