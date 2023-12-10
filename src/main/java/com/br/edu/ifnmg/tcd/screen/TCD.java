@@ -3,10 +3,6 @@
  */
 package com.br.edu.ifnmg.tcd.screen;
 
-/**
- *
- * @author Felkng <&it;felkng374 at @gmail.com&gt;>
- */
 public class TCD {
 
     public static void main(String[] args) {

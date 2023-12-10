@@ -7,11 +7,9 @@ CREATE TABLE book (
     title VARCHAR(150) NOT NULL,
     authors VARCHAR(250) NOT NULL,
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    acquisition DATE,
     pages SMALLINT,
     year SMALLINT NOT NULL,
     edition TINYINT,
-    price DECIMAL(10,2)
 )ENGINE=INNODB;
 
 DROP TABLE IF EXISTS `role`;

@@ -15,10 +15,6 @@ import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-/**
- *
- * @author Felkng <&it;felkng374 at @gmail.com&gt;>
- */
 public class TelaLogin extends javax.swing.JFrame {
 
     /**

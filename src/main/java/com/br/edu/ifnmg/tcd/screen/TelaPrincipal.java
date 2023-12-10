@@ -33,10 +33,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.swing.UIManager;
 
-/**
- *
- * @author Felkng <&it;felkng374 at @gmail.com&gt;>
- */
 public class TelaPrincipal extends javax.swing.JFrame {
 
     /**

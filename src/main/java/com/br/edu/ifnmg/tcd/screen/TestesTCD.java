@@ -17,10 +17,6 @@ import com.br.edu.ifnmg.tcd.user.UserDao;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- *
- * @author Felkng <&it;felkng374 at @gmail.com&gt;>
- */
 public class TestesTCD {
 
     public static void criarAdmin() {

@@ -1,5 +1,7 @@
 package com.br.edu.ifnmg.tcd.comment;
 
+import com.br.edu.ifnmg.tcd.book.Book;
+import com.br.edu.ifnmg.tcd.book.BookDao;
 import com.br.edu.ifnmg.tcd.reader.Reader;
 import com.br.edu.ifnmg.tcd.reader.ReaderDao;
 import com.br.edu.ifnmg.tcd.repository.Dao;
